@@ -1,6 +1,8 @@
 import re
 from functions import generate
 from functions import karnaughGroups
+from functions import normalForm
+
 
 if __name__ == '__main__':
     # initializare string => preluare din input dat de utilizator
@@ -90,6 +92,7 @@ if __name__ == '__main__':
 
     generate(ultima_col, karnaughPos, karnaughVal, res, inclusion)
     karnaughGroups(karnaughPos, karnaughVal, groups, inclusion, 1)
+    normalForm(groups, tabela, ultima_col, 0)
 
     print(groups)
 
@@ -100,3 +103,5 @@ if __name__ == '__main__':
     karnaughGroups(karnaughPos, karnaughVal, groups, inclusion, 0)
 
     print(groups)
+
+    normalForm(groups, tabela, ultima_col, 1)

@@ -104,3 +104,42 @@ def karnaughGroups(karnaughPos, karnaughVal, groups, inclusion, val):
     #     if(disposable == 1):
     #         groups.pop(i)
     #         i = i - 1
+
+
+def normalForm(groups, tabela, ultima_col, type):
+    afis = ""
+    for i in range (0, len(groups)):
+        if(type == 0):
+            piece = ""
+        else: piece = "("
+        charact = 'A'
+        for j in range(0, ultima_col):
+            sum = 0
+            for k in range(0, len(groups[i])):
+                sum = sum + tabela[groups[i][k]][j]
+            if(sum == 0 and type == 0):
+                piece = piece + charact + "\'"
+            elif(sum == 0 and type == 1 and piece == "("):
+                piece = piece + charact
+            elif(sum == 0 and type == 1):
+                piece = piece + " + " + charact
+            elif(sum == len(groups[i]) and type == 0):
+                piece = piece + charact
+            elif(sum == len(groups[i]) and type == 1 and piece == "("):
+                piece = piece + charact + "\'"
+            elif (sum == len(groups[i]) and type == 1):
+                piece = piece + " + " + charact + "\'"
+            charact = chr(ord(charact) + 1)
+        if(type == 1):
+            piece = piece + ")"
+        if(not afis):
+            afis = afis + piece
+        elif(type == 0): afis = afis + " + " + piece
+        else: afis = afis + " * " + piece
+
+    file1 = open("table.txt", "a")
+    if(type == 0):
+        file1.write("Forma normala disjunctiva: ")
+    else: file1.write("Forma normala conjunctiva: ")
+    file1.write(afis + "\n")
+    file1.close()
