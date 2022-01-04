@@ -1,5 +1,6 @@
 import re
-
+from functions import generate
+from functions import karnaughGroups
 
 if __name__ == '__main__':
     # initializare string => preluare din input dat de utilizator
@@ -75,3 +76,27 @@ if __name__ == '__main__':
         file1 = open("table.txt", "a")
         file1.write(afis + "\n")
         file1.close()
+
+    #generare matrici Karnaugh
+    if(ultima_col == 3):
+        karnaughPos = 2 * [8 * [0]]
+        karnaughVal = 2 * [8 * [0]]
+    else:
+        karnaughPos = 8 * [8 * [0]]
+        karnaughVal = 8 * [8 * [0]]
+
+    groups = []
+    inclusion = []
+
+    generate(ultima_col, karnaughPos, karnaughVal, res, inclusion)
+    karnaughGroups(karnaughPos, karnaughVal, groups, inclusion, 1)
+
+    print(groups)
+
+    groups = []
+    inclusion = []
+
+    generate(ultima_col, karnaughPos, karnaughVal, res, inclusion)
+    karnaughGroups(karnaughPos, karnaughVal, groups, inclusion, 0)
+
+    print(groups)
